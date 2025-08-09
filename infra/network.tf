@@ -3,7 +3,7 @@ data "aws_availability_zones" "available" {}
 
 resource "aws_vpc" "main" {
   cidr_block = "10.0.0.0/16"
-  tags = { Name = "ecs-vpc" }
+  tags       = { Name = "ecs-vpc" }
 }
 
 resource "aws_subnet" "public_1" {
@@ -11,17 +11,17 @@ resource "aws_subnet" "public_1" {
   cidr_block              = "10.0.1.0/24"
   availability_zone       = data.aws_availability_zones.available.names[0]
   map_public_ip_on_launch = true
-  tags = { Name = "ecs-public-1" }
+  tags                    = { Name = "ecs-public-1" }
 }
 
 resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.main.id
-  tags = { Name = "ecs-igw" }
+  tags   = { Name = "ecs-igw" }
 }
 
 resource "aws_route_table" "public" {
   vpc_id = aws_vpc.main.id
-  tags = { Name = "ecs-public-rt" }
+  tags   = { Name = "ecs-public-rt" }
 }
 
 resource "aws_route" "igw_route" {

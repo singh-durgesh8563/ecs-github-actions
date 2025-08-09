@@ -21,9 +21,9 @@ resource "aws_ecs_task_definition" "app" {
 
   container_definitions = jsonencode([
     {
-      name      = "app"
-      image     = local.image_uri
-      essential = true
+      name         = "app"
+      image        = local.image_uri
+      essential    = true
       portMappings = [{ containerPort = 80, hostPort = 80, protocol = "tcp" }]
       logConfiguration = {
         logDriver = "awslogs"
